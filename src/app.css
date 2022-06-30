@@ -1,0 +1,21 @@
+:root {
+   --violet: hsl(240, 100%, 70%);
+   --portugal: hsl(240, 60%, 40%);
+   --licorice: hsl(240, 20%, 20%);
+}
+
+html {
+   background-color: var(--licorice);
+   color: white;
+}
+
+body {
+   display: grid;
+   grid-template-rows: auto 1fr auto;
+   min-height: 100vh;
+}
+
+a {
+   color: var(--violet);
+   text-decoration: none;
+}
