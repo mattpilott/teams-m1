@@ -45,9 +45,7 @@
 
 <main class="main">
    <div class="greet">{greet()}</div>
-   <a class="button" {href} download on:click={() => ($history = build)}>
-      <span class="overlay">Download Teams</span>
-   </a>
+   <a class="button" {href} download on:click={() => ($history = build)}> Download Teams </a>
    <div class="meta">Last updated {date}</div>
    <div class="meta" class:firm={$history !== build}>
       {$history !== build ? 'New update' : ''}
@@ -61,11 +59,17 @@
    .header,
    .footer {
       display: grid;
-      font-size: 2.25rem;
+      font-size: 1.75rem;
       font-weight: 600;
       place-content: center;
       padding: 2rem;
       text-align: center;
+   }
+
+   @media (min-width: 48em) {
+      .button {
+         font-size: 2.25rem;
+      }
    }
 
    .main {
@@ -75,9 +79,15 @@
    }
 
    .greet {
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: 600;
       margin-top: -2rem;
+   }
+
+   @media (min-width: 48em) {
+      .button {
+         font-size: 2rem;
+      }
    }
 
    .button {
@@ -87,11 +97,18 @@
       border-radius: 100px;
       box-shadow: inset 0 0 0 1px hsl(0 0% 100% / 0.1), 0 10px 40px hsl(0 0% 0% / 0.1);
       color: hsl(0 0% 100% / 0.5);
-      font-size: 2rem;
+      font-size: 1.25rem;
       font-weight: 600;
       margin: 3rem 0 2rem;
-      padding: 1rem 4rem;
+      padding: 0.75rem 2rem;
       transition: all 0.75s ease;
+   }
+
+   @media (min-width: 48em) {
+      .button {
+         font-size: 2rem;
+         padding: 1rem 4rem;
+      }
    }
 
    .button:hover {
@@ -102,9 +119,15 @@
 
    .meta {
       color: hsl(240, 20%, 55%);
-      font-size: 1rem;
+      font-size: 0.875rem;
       font-weight: 400;
       margin-top: 1rem;
+   }
+
+   @media (min-width: 48em) {
+      .meta {
+         font-size: 1rem;
+      }
    }
 
    .firm {
