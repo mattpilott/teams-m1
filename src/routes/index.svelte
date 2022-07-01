@@ -34,6 +34,10 @@
    }
 </script>
 
+<svelte:head>
+   <title>🍎 Teams for Apple Silicon</title>
+</svelte:head>
+
 <header class="header">
    <div>Teams for Apple Silicon</div>
    <div class="meta">Get the latest build of Microsoft Teams for Apple Silicon with ease</div>
