@@ -11,7 +11,7 @@ html {
 body {
    display: grid;
    margin: 0 auto;
-   max-width: 94rem;
+   max-width: 100rem;
    min-height: 100vh;
    place-content: center;
 }
