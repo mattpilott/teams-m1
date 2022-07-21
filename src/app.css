@@ -1,21 +1,28 @@
 :root {
-   --violet: hsl(240, 100%, 70%);
-   --portugal: hsl(240, 60%, 40%);
-   --licorice: hsl(240, 20%, 20%);
+   --eerie: hsl(0, 0%, 12%);
+   --ship: hsl(0, 0%, 30%);
+   --blue: hsl(236, 74%, 70%);
 }
 
 html {
-   background-color: var(--licorice);
-   color: white;
+   background-color: var(--eerie);
 }
 
 body {
    display: grid;
-   grid-template-rows: auto 1fr auto;
    min-height: 100vh;
+   place-content: center;
+}
+
+@media (min-width: 40em) {
+   body {
+      display: grid;
+      gap: 5rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      padding: 5rem;
+   }
 }
 
 a {
-   color: var(--violet);
-   text-decoration: none;
+   color: var(--blue);
 }
