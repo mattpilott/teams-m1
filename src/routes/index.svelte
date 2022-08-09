@@ -1,15 +1,26 @@
 <script context="module">
    export async function load({ fetch }) {
+      const builds = {}
       const get_text = await fetch(import.meta.env.VITE_URL).then(r => r.text())
-      const text_to_array = get_text.split('\n')
-      const find_item = text_to_array.find(e => e.includes('osx-arm64'))
 
-      const build = find_item.split(' ')[0]
-      const date = find_item.match('on(.*?)with')[1]
-      const size = find_item.match('with(.*?):')[1]
-      const href = find_item.match(/\bhttps?:\/\/\S+/gi)
+      let name
 
-      return { props: { build, date, size, href } }
+      for (const item of get_text.split('\n')) {
+         if (item.includes('URLs for')) {
+            name = item.match('latest (.*?) ')[1]
+         }
+
+         if (item.includes('osx-arm64')) {
+            builds[name] = {
+               number: item.split(' ')[0],
+               date: item.match('on(.*?)with')[1],
+               size: item.match('with(.*?):')[1],
+               href: item.match(/\bhttps?:\/\/\S+/gi)
+            }
+         }
+      }
+
+      return { props: { builds } }
    }
 </script>
 
@@ -18,10 +29,8 @@
    import '../app.css'
    import { storable } from '@neuekit/utils'
 
-   export let build
-   export let date
-   export let size
-   export let href
+   export let builds
+   export let version = Object.keys(builds).at(-1)
 
    let history = storable(false)
 </script>
@@ -65,12 +74,19 @@
 <aside class="aside">
    <header class="head"> Silicon Teams</header>
    <img class="image" src="/icon.png" alt="Teams icon" />
-   <a class="button" {href} download on:click={() => ($history = build)}>Download</a>
+   <a class="button" href={builds[version].href} download on:click={() => ($history = builds[version].number)}
+      >Download</a
+   >
+   <select class="drop" bind:value={version}>
+      {#each Object.keys(builds) as build}
+         <option value={build}>{build} build</option>
+      {/each}
+   </select>
    <div>
-      <div class="meta">Updated {date}</div>
-      <div class="meta" class:firm={$history !== build}>
-         {$history !== build ? 'New build' : ''}
-         {build} @ {size}
+      <div class="meta">Updated {builds[version].date}</div>
+      <div class="meta" class:firm={$history !== builds[version].number}>
+         {$history !== builds[version].number ? 'New build' : ''}
+         {builds[version].number} @ {builds[version].size}
       </div>
    </div>
    <footer class="foot">
@@ -210,6 +226,21 @@
 
    .button:active {
       transform: translateY(2%);
+   }
+
+   .drop {
+      appearance: none;
+      background-color: hsl(0 0% 100% / 0.1);
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M13.3856 16.6C12.9309 17.3876 12.7036 17.7814 12.4067 17.9135C12.1478 18.0288 11.8522 18.0288 11.5933 17.9135C11.2964 17.7814 11.0691 17.3876 10.6144 16.6L6.45744 9.4C6.00272 8.61241 5.77536 8.21861 5.80933 7.89547C5.83895 7.61361 5.98678 7.35757 6.21606 7.19098C6.47893 7 6.93365 7 7.84308 7L16.1569 7C17.0664 7 17.5211 7 17.7839 7.19098C18.0132 7.35757 18.1611 7.61362 18.1907 7.89547C18.2246 8.21861 17.9973 8.61241 17.5426 9.4L13.3856 16.6Z' fill='white'/%3E%3C/svg%3E");
+      background-position: right 0.5rem center;
+      background-size: 16px;
+      border-radius: 8px;
+      color: hsl(0 0% 100% / 0.8);
+      display: inline-block;
+      margin-top: -2rem;
+      padding: 0.25rem 2rem 0.25rem 0.5rem;
+      text-align: center;
+      text-transform: capitalize;
    }
 
    .meta {
