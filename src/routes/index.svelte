@@ -237,7 +237,7 @@
       border-radius: 8px;
       color: hsl(0 0% 100% / 0.8);
       display: inline-block;
-      margin-top: -2rem;
+      margin-top: -1.5rem;
       padding: 0.25rem 2rem 0.25rem 0.5rem;
       text-align: center;
       text-transform: capitalize;
