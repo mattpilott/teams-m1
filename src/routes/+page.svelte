@@ -1,37 +1,13 @@
-<script context="module">
-   export async function load({ fetch }) {
-      const builds = {}
-      const get_text = await fetch(import.meta.env.VITE_URL).then(r => r.text())
-
-      let name
-
-      for (const item of get_text.split('\n')) {
-         if (item.includes('URLs for')) {
-            name = item.match('latest (.*?) ')[1]
-         }
-
-         if (item.includes('osx-arm64')) {
-            builds[name] = {
-               number: item.split(' ')[0],
-               date: item.match('on(.*?)with')[1],
-               size: item.match('with(.*?):')[1],
-               href: item.match(/\bhttps?:\/\/\S+/gi)
-            }
-         }
-      }
-
-      return { props: { builds } }
-   }
-</script>
-
 <script>
    import '@neuekit/reboot/reboot.css'
    import '../app.css'
    import { storable } from '@neuekit/utils'
 
-   export let builds
-   export let version = Object.keys(builds).at(-1)
+   /** @type {import('./$types').PageData} */
+   export let data
 
+   let { builds } = data
+   let version = Object.keys(builds).at(-2)
    let history = storable(false)
 </script>
 
@@ -139,9 +115,9 @@
          border-radius: 40px;
          box-shadow: 0 5px 20px hsl(0 0% 0% / 0.2);
          display: grid;
-         gap: 2.5rem;
+         gap: 1.25rem;
          grid-template-rows: auto 1fr auto;
-         padding: 5rem;
+         padding: 2.5rem;
       }
 
       .head {
@@ -156,13 +132,24 @@
 
       .body {
          color: var(--ship);
-         font-size: 1.25rem;
+         font-size: 1rem;
       }
 
       .foot {
          display: flex;
          font-size: 0.875rem;
          justify-content: space-between;
+      }
+   }
+
+   @media (min-width: 80em) {
+      .main {
+         gap: 2.5rem;
+         padding: 4rem;
+      }
+
+      .body {
+         font-size: 1.25rem;
       }
    }
 
