@@ -43,7 +43,7 @@
    </div>
    <footer class="foot">
       <div>Made by Matt | In no way affiliated with Microsoft</div>
-      <a href="https://github.com/mattpilott/teams-m1" target="_blank">Github</a>
+      <a href="https://github.com/mattpilott/teams-m1" target="_blank" rel="noreferrer">Github</a>
    </footer>
 </main>
 
@@ -67,7 +67,7 @@
    </div>
    <footer class="foot">
       <div>Made by Matt<br />In no way affiliated with Microsoft</div>
-      <a href="https://github.com/mattpilott/teams-m1" target="_blank">Github</a>
+      <a href="https://github.com/mattpilott/teams-m1" target="_blank" rel="noreferrer">Github</a>
    </footer>
 </aside>
 
