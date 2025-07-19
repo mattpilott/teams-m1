@@ -1,3 +1,5 @@
+@import 'kitto/unify';
+
 :root {
    --eerie: hsl(0, 0%, 12%);
    --ship: hsl(0, 0%, 30%);
@@ -6,6 +8,8 @@
 
 html {
    background-color: var(--eerie);
+	-webkit-font-smoothing: antialiased;
+	scroll-behavior: smooth;
 }
 
 body {
